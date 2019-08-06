@@ -1,0 +1,21 @@
+server:
+  port: 9000
+
+#日志
+logging:
+  level:
+    root: WARN
+
+#配置激活的profile，配合在Bean上标注的@Profile("production")注解可以激活指定的Bean
+#配合application-{profile}.properties格式的属性文件，可以激活指定的属性配置。
+#配合使用---分割的yml配置文件。以及其中各段指定的spring.profiles: development属性，也可以激活特定的属性配置。
+
+spring:
+  profiles:
+    active: production
+
+#百度云OCR设置
+ocr:
+  appid:
+  appkey:
+  secretkey:
