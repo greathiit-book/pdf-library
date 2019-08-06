@@ -14,13 +14,15 @@ public class OcrUtils {
     @Autowired
     private static AipOcr ocrClient;
 
-    public static void ocr(byte[] image){
+    public static String ocr(byte[] image){
+        String ocrResult = null;
         JSONObject result = ocrClient.basicGeneral(image, null);
         if(result.getInt("words_result_num") > 0) {
             JSONArray fragments = result.getJSONArray("words_result");
-            fragments.toList().stream().map((Object json)-> {
+            ocrResult = fragments.toList().stream().map((Object json)-> {
                 return ((JSONObject)json).getString("words");
             }).reduce("",(String a,String b)->a.concat(b));
         }
+        return ocrResult;
     }
 }
