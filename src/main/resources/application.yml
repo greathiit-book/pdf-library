@@ -16,6 +16,6 @@ spring:
 
 #百度云OCR设置
 ocr:
-  appid:
-  appkey:
-  secretkey:
+  appid: 16963748
+  appkey: bSEovX4T3o3d0Lvt49i89Eyn
+  secretkey: GAX6iuR0YQ86nKVSoAG5tV7sILy5bc1M
