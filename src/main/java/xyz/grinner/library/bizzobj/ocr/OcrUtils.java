@@ -4,11 +4,13 @@ import com.baidu.aip.ocr.AipOcr;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: chenkai
  * @Date: 2019/8/6 18:10
  */
+@Component
 public class OcrUtils {
 
     @Autowired

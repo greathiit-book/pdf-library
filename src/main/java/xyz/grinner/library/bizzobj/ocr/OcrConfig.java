@@ -11,16 +11,16 @@ import org.springframework.context.annotation.Bean;
  * @Date: 2019/8/6 17:05
  */
 @Data
-@ConfigurationProperties(prefix="ocr")//通过前缀提示将配置里面的内容注入到当前Bean的属性上。也可以标注在方法上，需要有对应的setter
+//@ConfigurationProperties(prefix="ocr")//通过前缀提示将配置里面的内容注入到当前Bean的属性上。也可以标注在方法上，需要有对应的setter
 public class OcrConfig {
 
-    @Value("appid")
+    @Value("${ocr.appid}")
     private static String APP_ID;
 
-    @Value("appkey")
+    @Value("${ocr.appkey}")
     public static String API_KEY;
 
-    @Value("secretkey")
+    @Value("${ocr.secretkey}")
     public static String SECRET_KEY;
 
     @Bean

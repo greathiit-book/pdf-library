@@ -23,6 +23,9 @@ public class BookService {
     @Autowired
     EsUtils esUtils;
 
+    @Autowired
+    EsConfig esConfig;
+
     public void  stackBooks(String bookPackage){
         File theCat = new File(bookPackage);
         if(theCat.exists()){
@@ -71,9 +74,14 @@ public class BookService {
         }
     }
 
+    public List<Book> searchBook(String query){
+        return  esUtils.searchBook(query);
+    }
+
+
     private void saveBook(Book book){
         try {
-            esUtils.saveDoc(EsConfig.LIBRARY,book);
+            esUtils.saveDoc(esConfig.LIBRARY,book);
         } catch (IOException e) {
             e.printStackTrace();
         }

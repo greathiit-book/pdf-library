@@ -6,6 +6,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
  * @Author: chenkai
  * @Date: 2019/8/6 19:31
  */
+@Component
 public class PdfUtils {
 
     public static ArrayList<byte[]> getAllPages(File book) throws IOException {

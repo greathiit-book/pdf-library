@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import xyz.grinner.library.dataobj.esdoc.Book;
 import xyz.grinner.library.service.BookService;
+
+import java.util.List;
 
 /**
  * @Author: chenkai
@@ -25,7 +28,7 @@ public class LibraryController {
 
 
     @GetMapping("/book/finding")
-    public void findTheCat(@RequestParam String info){
-
+    public List<Book> findTheCat(@RequestParam String info){
+        return  bookService.searchBook(info);
     }
 }

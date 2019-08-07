@@ -7,29 +7,30 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: chenkai
  * @Date: 2019/8/6 16:38
  */
-
-@ConfigurationProperties(prefix="es")//通过前缀提示将配置里面的内容注入到当前Bean的属性上。也可以标注在方法上，需要有对应的setter
+@Component
+//@ConfigurationProperties//通过前缀提示将配置里面的内容注入到当前Bean的属性上。也可以标注在方法上，需要有对应的setter
 public class EsConfig {
 
-    @Value("library")
-    public static String LIBRARY;
+    @Value("${es.library}")
+    public String LIBRARY;
 
-    @Value("index.shards")
-    public static int SHARDS;
+    @Value("${es.index.shards}")
+    public int SHARDS;
 
-    @Value("index.replicas")
-    public static int REPLICAS;
+    @Value("${es.index.replicas}")
+    public int REPLICAS;
 
-    @Value("host")
-    private static String HOST;
+    @Value("${es.host}")
+    private String HOST;
 
-    @Value("port")
-    private static int PORT;
+    @Value("${es.port}")//可以放在私有字段上，但是不能放到静态字段上。
+    private int PORT;
 
 
     @Bean
