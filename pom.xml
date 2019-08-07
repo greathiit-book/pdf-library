@@ -40,17 +40,25 @@
             <optional>true</optional>
         </dependency>
 
+        <!--Ocr-->
         <dependency>
             <groupId>com.baidu.aip</groupId>
             <artifactId>java-sdk</artifactId>
             <version>4.11.3</version>
         </dependency>
 
-
+        <!--PdfBox-->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>2.0.16</version>
+        </dependency>
+
+        <!--ElasticSearch-->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>7.3.0</version>
         </dependency>
 
 	</dependencies>

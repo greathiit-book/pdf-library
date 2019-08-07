@@ -1,19 +1,17 @@
-package xyz.grinner.library.pdf;
+package xyz.grinner.library.bizzobj.pdf;
 
 import org.apache.pdfbox.cos.COSName;
-import org.apache.pdfbox.pdfparser.PDFStreamParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.apache.pdfbox.text.PDFTextStripper;
 
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * @Author: chenkai
@@ -44,4 +42,13 @@ public class PdfUtils {
         }
         return imagePages;
     }
+
+    public static String getBookContent(File book) throws IOException {
+        PDDocument document  = PDDocument.load(book);
+        PDFTextStripper stripper=new PDFTextStripper();
+        stripper.setSortByPosition(true);
+        String content = stripper.getText(document);
+        return content;
+    }
+
 }

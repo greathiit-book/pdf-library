@@ -1,4 +1,4 @@
-package xyz.grinner.library.ocr;
+package xyz.grinner.library.bizzobj.ocr;
 
 import com.baidu.aip.ocr.AipOcr;
 import org.json.JSONArray;
