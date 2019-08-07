@@ -21,6 +21,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xyz.grinner.library.dataobj.esdoc.Book;
@@ -46,7 +47,7 @@ public class EsUtils {
     @Autowired
     private RestHighLevelClient client;
 
-    private static IndicesClient indexClient;
+    private IndicesClient indexClient;
 
     @Autowired
     ObjectMapper mapper = new ObjectMapper();
@@ -156,7 +157,8 @@ public class EsUtils {
         if(response != null){
             // 解析结果
             SearchHits hits = response.getHits();
-            Arrays.stream(hits.getHits()).forEach((SearchHit hit)->{
+            SearchHit[] hitsArray = hits.getHits();
+            Arrays.stream(hitsArray).forEach((SearchHit hit)->{
                 String sourceAsString = hit.getSourceAsString();
                 try {
                     Book book = mapper.readValue(sourceAsString, Book.class);

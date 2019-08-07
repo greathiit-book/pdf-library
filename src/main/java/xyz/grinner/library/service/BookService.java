@@ -26,12 +26,16 @@ public class BookService {
     @Autowired
     EsConfig esConfig;
 
+    @Autowired
+    OcrUtils ocrUtils;
+
     public void  stackBooks(String bookPackage){
         File theCat = new File(bookPackage);
         if(theCat.exists()){
             List<File> filesQueue = new ArrayList<>();
             filesQueue.add(theCat);
             for(int i = 0;i < filesQueue.size();i++){
+                theCat = filesQueue.get(i);
                 if(theCat.isDirectory()){
                     Arrays.stream(theCat.listFiles()).forEach(filesQueue::add);
                 }
@@ -51,7 +55,7 @@ public class BookService {
                         Iterator<byte[]> it = pages.iterator();
                         while (it.hasNext()){
                             byte[] page = it.next();
-                            String content = OcrUtils.ocr(page);
+                            String content = ocrUtils.ocr(page);
                             Book book = new Book(path,name,pageNumber++,content);
                             saveBook(book);
                         }

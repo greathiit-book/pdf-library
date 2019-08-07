@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: chenkai
@@ -12,16 +13,17 @@ import org.springframework.context.annotation.Bean;
  */
 @Data
 //@ConfigurationProperties(prefix="ocr")//通过前缀提示将配置里面的内容注入到当前Bean的属性上。也可以标注在方法上，需要有对应的setter
+@Component
 public class OcrConfig {
 
     @Value("${ocr.appid}")
-    private static String APP_ID;
+    private String APP_ID;
 
     @Value("${ocr.appkey}")
-    public static String API_KEY;
+    public String API_KEY;
 
     @Value("${ocr.secretkey}")
-    public static String SECRET_KEY;
+    public String SECRET_KEY;
 
     @Bean
     private AipOcr getOcrClient(){

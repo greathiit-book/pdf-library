@@ -1,0 +1,16 @@
+{
+  "properties":{
+    "path":{
+      "type":"keyword"
+    },
+    "name":{
+      "type":"text"
+    },
+    "page":{
+      "type":"keyword"
+    },
+    "content":{
+      "type":"text"
+    }
+  }
+}
