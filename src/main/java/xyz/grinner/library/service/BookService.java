@@ -36,8 +36,12 @@ public class BookService {
             filesQueue.add(theCat);
             for(int i = 0;i < filesQueue.size();i++){
                 theCat = filesQueue.get(i);
+                System.out.println(theCat);
                 if(theCat.isDirectory()){
-                    Arrays.stream(theCat.listFiles()).forEach(filesQueue::add);
+                    File[] files = theCat.listFiles();
+                    if(files != null){
+                        Arrays.stream(files).forEach(filesQueue::add);
+                    }
                 }
                 String name = theCat.getName();
                 if(name.indexOf(".pdf") != -1){
@@ -56,8 +60,12 @@ public class BookService {
                         while (it.hasNext()){
                             byte[] page = it.next();
                             String content = ocrUtils.ocr(page);
-                            Book book = new Book(path,name,pageNumber++,content);
-                            saveBook(book);
+                            if(content == null){
+                                System.out.println(theCat.getAbsolutePath());
+                            }else{
+                                Book book = new Book(path,name,pageNumber++,content);
+                                saveBook(book);
+                            }
                         }
                     }
 

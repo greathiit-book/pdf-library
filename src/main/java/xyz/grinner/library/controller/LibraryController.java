@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import xyz.grinner.library.dataobj.esdoc.Book;
 import xyz.grinner.library.service.BookService;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @Author: chenkai
  * @Date: 2019/8/7 13:22
  */
-@Controller
+@RestController
 @RequestMapping("/library")
 public class LibraryController {
 

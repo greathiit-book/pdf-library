@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 //@ConfigurationProperties(prefix="ocr")//通过前缀提示将配置里面的内容注入到当前Bean的属性上。也可以标注在方法上，需要有对应的setter
+//prefix+.+属性 = 配置文件里的prefix.属性才能成功。
 @Component
 public class OcrConfig {
 

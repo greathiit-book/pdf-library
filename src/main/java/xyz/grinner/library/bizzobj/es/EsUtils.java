@@ -72,6 +72,8 @@ public class EsUtils {
             @Override
             public void onFailure(Exception e) {
                 // TODO: 2019/8/7  日志处理
+                e.printStackTrace();
+                System.out.println();
             }
         };
         indexClient = client.indices();
