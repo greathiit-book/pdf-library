@@ -21,10 +21,9 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import xyz.grinner.library.dataobj.esdoc.Book;
+import xyz.grinner.library.dataobj.esdoc.Page;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -136,8 +135,8 @@ public class EsUtils {
         }
     }
 
-    public List<Book> searchBook(String query){
-        List<Book> books = new ArrayList<>();
+    public List<Page> searchBook(String query){
+        List<Page> pages = new ArrayList<>();
         // 1.书名包含关键字
         // 2.内容包含关键字
         QueryBuilder boolQueryBuilder= QueryBuilders.boolQuery()
@@ -163,13 +162,13 @@ public class EsUtils {
             Arrays.stream(hitsArray).forEach((SearchHit hit)->{
                 String sourceAsString = hit.getSourceAsString();
                 try {
-                    Book book = mapper.readValue(sourceAsString, Book.class);
-                    books.add(book);
+                    Page page = mapper.readValue(sourceAsString, Page.class);
+                    pages.add(page);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
         }
-        return books;
+        return pages;
     }
 }

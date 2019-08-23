@@ -1,13 +1,12 @@
 package xyz.grinner.library.service;
 
-import org.elasticsearch.index.mapper.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.grinner.library.bizzobj.es.EsConfig;
 import xyz.grinner.library.bizzobj.es.EsUtils;
 import xyz.grinner.library.bizzobj.ocr.OcrUtils;
 import xyz.grinner.library.bizzobj.pdf.PdfUtils;
-import xyz.grinner.library.dataobj.esdoc.Book;
+import xyz.grinner.library.dataobj.esdoc.Page;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,8 +62,8 @@ public class BookService {
                             if(content == null){
                                 System.out.println(theCat.getAbsolutePath());
                             }else{
-                                Book book = new Book(path,name,pageNumber++,content);
-                                saveBook(book);
+//                                Page book = new Page(path,name,pageNumber++,content);
+//                                saveBook(book);
                             }
                         }
                     }
@@ -77,8 +76,8 @@ public class BookService {
                         e.printStackTrace();
                     }
                     if(content != null){
-                        Book book = new Book(path,name,0,content);
-                        saveBook(book);
+//                        Page page = new Page(path,name,0,content);
+//                        saveBook(page);
                     }
                 }
             }
@@ -86,14 +85,14 @@ public class BookService {
         }
     }
 
-    public List<Book> searchBook(String query){
+    public List<Page> searchBook(String query){
         return  esUtils.searchBook(query);
     }
 
 
-    private void saveBook(Book book){
+    private void saveBook(Page page){
         try {
-            esUtils.saveDoc(esConfig.LIBRARY,book);
+            esUtils.saveDoc(esConfig.LIBRARY, page);
         } catch (IOException e) {
             e.printStackTrace();
         }

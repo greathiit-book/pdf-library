@@ -1,12 +1,11 @@
 package xyz.grinner.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.grinner.library.dataobj.esdoc.Book;
+import xyz.grinner.library.dataobj.esdoc.Page;
 import xyz.grinner.library.service.BookService;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class LibraryController {
 
 
     @GetMapping("/book/finding")
-    public List<Book> findTheCat(@RequestParam String info){
+    public List<Page> findTheCat(@RequestParam String info){
         return  bookService.searchBook(info);
     }
 }
