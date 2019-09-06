@@ -13,7 +13,16 @@ logging:
 spring:
   profiles:
     active: production
-
+  #db设置
+  datasource:
+    url: jdbc:mysql://localhost:3306/doc_manage?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: chenkai
+    password: 90-=op[]
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    pool-size: 30
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
 #百度云OCR设置
 ocr:
   appid: 16963748
@@ -21,7 +30,6 @@ ocr:
   secretkey: GAX6iuR0YQ86nKVSoAG5tV7sILy5bc1M
 
 #Es索引设置
-
 es:
   library: library
   host: localhost
@@ -29,3 +37,4 @@ es:
   index:
     shards: 2
     replicas: 3
+

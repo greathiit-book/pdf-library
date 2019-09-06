@@ -15,6 +15,7 @@ import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -79,41 +80,22 @@ public class EsUtils {
         indexClient.existsAsync(request,RequestOptions.DEFAULT,listener);
     }
 
-    public void creatIndex(String name) throws IOException {
+    public boolean creatIndex(String name) throws IOException {
+        InputStream inputStream = EsUtils.class.getResourceAsStream("/es/page.json");
+        byte[] datas =  IOUtils.toByteArray(inputStream);
+        String mappingContent = new String(datas);
+
         CreateIndexRequest request = new CreateIndexRequest(name);
+        request.mapping(mappingContent, XContentType.JSON);
+        request.setTimeout(TimeValue.timeValueSeconds(5));
         request.settings(Settings.builder()
                 .put("index.number_of_shards", esConfig.SHARDS)
                 .put("index.number_of_replicas", esConfig.REPLICAS)
         );
 
-        InputStream inputStream = EsUtils.class.getResourceAsStream("/es/"+ name +".json");
-        byte[] datas =  IOUtils.toByteArray(inputStream);
-        String mappingContent = new String(datas);
-
-        request.mapping(mappingContent, XContentType.JSON);
-
-        ActionListener<CreateIndexResponse> listener =
-            new ActionListener<CreateIndexResponse>() {
-                @Override
-                public void onResponse(CreateIndexResponse createIndexResponse) {
-                    boolean acknowledged = createIndexResponse.isAcknowledged();
-                    if(!acknowledged){
-                        // TODO 记录创建索引失败
-                    }
-                    boolean shardsAcknowledged = createIndexResponse.isShardsAcknowledged();
-                    if(!shardsAcknowledged){
-                        // TODO 记录创建分片失败
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Exception e) {
-                    // TODO: 2019/8/7
-                }
-        };
-
-        indexClient.createAsync(request, RequestOptions.DEFAULT, listener);
+        CreateIndexResponse createIndexResponse = indexClient.create(request, RequestOptions.DEFAULT);
+        boolean acknowledged = createIndexResponse.isAcknowledged();
+        return acknowledged;
     }
 
     public void saveDoc(String index,Object doc) throws IOException {

@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>文档资源管理系统</title>
-</head>
-<body>
-    EveryBody
-</body>
+<html lang="zh-CN">
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>文档资源管理系统</title>
+
+        <link rel="stylesheet" href="./layui/css/layui.css">
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+        <script src="./layui/layui.all.js"></script>
+        <script src="./js/treeLoader.js"></script>
+    </head>
+    <body>
+        <div class="layui-main">
+            <div class="layui-tab"  lay-filter="main-menu">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">文档内容搜索</li>
+                    <li>图书管理系统</li>
+                    <li>媒体资源管理</li>
+                    <li>商品管理</li>
+                    <li>订单管理</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show layui-row">
+                        <div id="lib-tree-content" class="layui-col-md6"></div>
+                        <div id="index-tree-content" class="layui-col-md6"></div>
+                        <script>
+                            TreeLoader.loadLibTree("Find","#lib-tree-content");
+
+                            layui.element.on('tab(main-menu)', function(data){
+                              console.log(this); //当前Tab标题所在的原始DOM元素
+                              console.log(data.index); //得到当前Tab的所在下标
+                              console.log(data.elem); //得到当前的Tab大容器
+                            });
+                        </script>
+                    </div>
+                    <div class="layui-tab-item">内容2</div>
+                    <div class="layui-tab-item">内容3</div>
+                    <div class="layui-tab-item">内容4</div>
+                    <div class="layui-tab-item">内容5</div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

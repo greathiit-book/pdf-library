@@ -3,8 +3,8 @@
     "path":{
       "type":"keyword"
     },
-    "name":{
-      "type":"text"
+    "mediaType":{
+      "type":"keyword"
     },
     "page":{
       "type":"keyword"
