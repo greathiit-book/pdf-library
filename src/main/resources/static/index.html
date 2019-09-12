@@ -7,8 +7,11 @@
         <title>文档资源管理系统</title>
 
         <link rel="stylesheet" href="./layui/css/layui.css">
+        <link rel="stylesheet" href="./ztree/css/zTreeStyle.css">
+
         <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
         <script src="./layui/layui.all.js"></script>
+        <script src="./ztree/jquery.ztree.all.js"></script>
         <script src="./js/treeLoader.js"></script>
     </head>
     <body>
@@ -23,10 +26,14 @@
                 </ul>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show layui-row">
-                        <div id="lib-tree-content" class="layui-col-md6"></div>
-                        <div id="index-tree-content" class="layui-col-md6"></div>
+                        <div id="lib-tree-content" class="layui-col-md6">
+                            <ul id="lib-tree" class="ztree"></ul>
+                        </div>
+                        <div id="index-tree-content" class="layui-col-md6">
+                            <ul id="index-tree" class="ztree"></ul>
+                        </div>
                         <script>
-                            TreeLoader.loadLibTree("Find","#lib-tree-content");
+                            TreeLoader.loadLibTree("Find",$("#lib-tree"));
 
                             layui.element.on('tab(main-menu)', function(data){
                               console.log(this); //当前Tab标题所在的原始DOM元素

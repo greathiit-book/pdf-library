@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.pdfbox.io.IOUtils;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.DocWriteResponse;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.IndicesClient;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -96,6 +98,13 @@ public class EsUtils {
         CreateIndexResponse createIndexResponse = indexClient.create(request, RequestOptions.DEFAULT);
         boolean acknowledged = createIndexResponse.isAcknowledged();
         return acknowledged;
+    }
+
+    public boolean deleteIndex(String name) throws IOException {
+        DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest();
+        deleteIndexRequest.indices(name);
+        AcknowledgedResponse deleteIndexResponse = indexClient.delete(deleteIndexRequest, RequestOptions.DEFAULT);
+        return deleteIndexResponse.isAcknowledged();
     }
 
     public void saveDoc(String index,Object doc) throws IOException {

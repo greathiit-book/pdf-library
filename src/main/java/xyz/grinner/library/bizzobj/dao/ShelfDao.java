@@ -29,6 +29,19 @@ public interface ShelfDao {
 
    @Insert({"INSERT INTO shelf",
             "(name,type)",
-            "VALUES(#{name},#{type})"})
-   int addShelf(@Param("name")String name,@Param("type") Use type);
+            "VALUES(#{shelf.name},#{shelf.type})"})
+   @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+   int addShelf(@Param("shelf")Shelf shelf);
+
+
+    @Select({"SELECT *",
+            "FROM shelf",
+            "WHERE id = ${id}"})
+    @Results({
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "type", column = "type"),
+            @Result(property = "directory", column = "directory"),
+    })
+    Shelf getShelf(@Param("id")int id);
 }

@@ -11,5 +11,6 @@ import xyz.grinner.library.single.enums.Use;
 public class Shelf {
     private int id;
     private String name;//索引名称
+    private String directory;//文件目录
     private Use type;//使用目的
 }
