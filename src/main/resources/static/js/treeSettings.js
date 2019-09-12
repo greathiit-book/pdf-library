@@ -1,15 +1,18 @@
 TreeSettings = {
-   check:{
-       enable:true
-   },
-   edit:{
-       enable:true,
-       editNameSelectAll:true,
-       removeTitle:"删除索引",
-       renameTitle:"重命名"
-   },
-   callback:{
-       beforeRemove :
-       beforeRename :
-   }
+    libTree : {
+       check:{
+           enable:true,
+           chkDisabledInherit:false
+       },
+       edit:{
+           enable:true,
+           editNameSelectAll:true,
+           removeTitle:"删除",
+           renameTitle:"重命名"
+       },
+       callback:{
+           beforeRemove : LibraryOperation.beforeDelete,
+           beforeRename : LibraryOperation.beforeRename
+       }
+    }
 }

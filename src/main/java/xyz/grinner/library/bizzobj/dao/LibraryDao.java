@@ -31,4 +31,25 @@ public interface LibraryDao {
             "VALUES(#{libId},#{shelfId})"
     })
     int extend(@Param("libId") int libId,@Param("shelfId") int shelfId);
+
+
+    @Delete({
+            "DELETE FROM library",
+            "WHERE id = #{id}"
+    })
+    int deleteLibrary(@Param("id")int libId);
+
+    @Delete({
+            "DELETE FROM library_shelf",
+            "WHERE library_id = #{id}"
+    })
+    int deleteCollection(@Param("id")int libId);
+
+    @Update({
+            "UPDATE library",
+            "SET name = #{newName}",
+            "WHERE id = #{id}"
+
+    })
+    int renameLibrary(@Param("id")int id,@Param("newName")String newName);
 }

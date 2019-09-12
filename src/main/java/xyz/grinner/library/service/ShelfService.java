@@ -6,9 +6,11 @@ import xyz.grinner.library.bizzobj.dao.LibraryDao;
 import xyz.grinner.library.bizzobj.dao.ShelfDao;
 import xyz.grinner.library.bizzobj.es.EsUtils;
 import xyz.grinner.library.dataobj.dbtable.Shelf;
+import xyz.grinner.library.dataobj.model.Result;
+import xyz.grinner.library.single.enums.Use;
 
-import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @Author: chenkai
@@ -25,11 +27,15 @@ public class ShelfService {
     @Autowired
     EsUtils esUtils;
 
-    public Shelf addShelf(HashSet<Integer> libraries, Shelf shelf){
+    public List<Shelf> getAllShelves(Use type){
+        return shelfDao.getAllShelves(type);
+    }
+
+    public Result addShelf(HashSet<Integer> libraries, Shelf shelf){
         boolean created;
         try {
             created = esUtils.creatIndex(shelf.getName());
-        } catch (IOException e) {
+        } catch (Exception e) {
             created =false;
         }
         if(created){
@@ -40,17 +46,28 @@ public class ShelfService {
                 });
             }
         }
-        return shelf;
+        return Result.created(shelf);
     }
 
-    public Shelf deleteShelf(int id) {
+    public Result deleteShelf(int id) {
         Shelf shelf = shelfDao.getShelf(id);
         if(shelf != null){
             try {
                 esUtils.deleteIndex(shelf.getName());
-            } catch (IOException e) {
-
+            } catch (Exception e) {
+                return Result.fail("删除索引失败");
             }
         }
+        return Result.success();
     }
+
+    public Result renameShelf(int id, String newName) {
+        if(shelfDao.renameShelf(id,newName) > 0){
+            return Result.success();
+        }
+        return Result.fail("图书馆改名失败");
+    }
+
+
+
 }
